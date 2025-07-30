@@ -39,7 +39,7 @@ namespace FlaUInspect.ViewModels
                 }
                 var capturedImage = SelectedItemInTree.AutomationElement.Capture();
                 var saveDialog = new SaveFileDialog();
-                saveDialog.Filter = "Png file (*.png)|*.png";
+                saveDialog.Filter = "PNG文件 (*.png)|*.png";
                 if (saveDialog.ShowDialog() == true)
                 {
                     capturedImage.Save(saveDialog.FileName, ImageFormat.Png);
@@ -154,7 +154,7 @@ namespace FlaUInspect.ViewModels
                 catch (Exception ex)
                 {
                     // TODO: Log
-                    Console.WriteLine($"Exception: {ex.Message}");
+                    Console.WriteLine($"异常: {ex.Message}");
                 }
             }
 
@@ -179,7 +179,7 @@ namespace FlaUInspect.ViewModels
                     if (nextElementVm == null)
                     {
                         // The next element is still not found, exit the loop
-                        Console.WriteLine("Could not find the next element!");
+                        Console.WriteLine("无法找到下一个元素！");
                         break;
                     }
                 }

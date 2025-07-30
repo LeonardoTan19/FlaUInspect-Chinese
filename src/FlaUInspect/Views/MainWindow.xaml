@@ -1,4 +1,4 @@
-<Window x:Class="FlaUInspect.Views.MainWindow"
+﻿<Window x:Class="FlaUInspect.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,7 +7,7 @@
         xmlns:models="clr-namespace:FlaUInspect.Models"
         xmlns:flauidef="clr-namespace:FlaUI.Core.Definitions;assembly=FlaUI.Core"
         xmlns:viewModels="clr-namespace:FlaUInspect.ViewModels"
-        Title="FlaUInspect" d:DesignHeight="350" d:DesignWidth="500" d:LayoutOverrides="Width, Height" ResizeMode="CanResizeWithGrip">
+        Title="FlaUI检查器" d:DesignHeight="350" d:DesignWidth="500" d:LayoutOverrides="Width, Height" ResizeMode="CanResizeWithGrip">
     <Window.Resources>
         <Style x:Key="SelectableLabel" TargetType="{x:Type TextBox}">
             <Setter Property="Background" Value="Transparent" />
@@ -23,16 +23,16 @@
         <DockPanel>
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="文件(_F)">
-                    <MenuItem Header="新建实例" Command="{Binding StartNewInstanceCommand}" />
-                    <MenuItem Header="捕获选中项" Command="{Binding CaptureSelectedItemCommand}" />
-                    <MenuItem Header="刷新(_R)" InputGestureText="F5" />
+                    <MenuItem Header="新建实例(_N)" Command="{Binding StartNewInstanceCommand}" />
+                    <MenuItem Header="捕获选中项(_C)" Command="{Binding CaptureSelectedItemCommand}" />
+                    <MenuItem Header="刷新(_R)" Command="{Binding RefreshCommand}" InputGestureText="F5" />
                     <Separator />
-                    <MenuItem Header="退出(_X)" Click="MenuItem_Click" />
+                    <MenuItem Header="退出(_E)" Click="MenuItem_Click" />
                 </MenuItem>
                 <MenuItem Header="模式(_M)">
-                    <MenuItem Header="悬停模式（使用Ctrl）" IsCheckable="True" IsChecked="{Binding EnableHoverMode}" />
-                    <MenuItem Header="焦点跟踪" IsCheckable="True" IsChecked="{Binding EnableFocusTrackingMode}" />
-                    <MenuItem Header="显示XPath" IsCheckable="True" IsChecked="{Binding EnableXPath}" />
+                    <MenuItem Header="悬停模式(使用Ctrl)(_H)" IsCheckable="True" IsChecked="{Binding EnableHoverMode}" />
+                    <MenuItem Header="焦点跟踪(_F)" IsCheckable="True" IsChecked="{Binding EnableFocusTrackingMode}" />
+                    <MenuItem Header="显示XPath(_X)" IsCheckable="True" IsChecked="{Binding EnableXPath}" />
                 </MenuItem>
             </Menu>
             <StatusBar DockPanel.Dock="Bottom">
@@ -41,7 +41,7 @@
                 </StatusBarItem>
                 <StatusBarItem>
                     <StackPanel Orientation="Horizontal" Visibility="{Binding EnableXPath, Converter={StaticResource BooleanToVisibilityConverter}}">
-                        <Label>XPath:</Label>
+                        <Label>XPath路径:</Label>
                         <TextBox VerticalAlignment="Center">
                             <TextBox.Style>
                                 <Style BasedOn="{StaticResource SelectableLabel}" TargetType="{x:Type TextBox}">
@@ -87,16 +87,121 @@
                                                     <DataTrigger Binding="{Binding ControlType}" Value="{x:Static flauidef:ControlType.Button}">
                                                         <Setter Property="Source" Value="/Resources/Button.png" />
                                                     </DataTrigger>
-                                                    <!-- 其他ControlType图片触发器保持不变 -->
-                                                    <!-- 因图片资源路径与语言无关，无需修改 -->
+                                                    <DataTrigger Binding="{Binding ControlType}" Value="{x:Static flauidef:ControlType.Calendar}">
+                                                        <Setter Property="Source" Value="/Resources/Calendar.png" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ControlType}" Value="{x:Static flauidef:ControlType.CheckBox}">
+                                                        <Setter Property="Source" Value="/Resources/CheckBox.png" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ControlType}" Value="{x:Static flauidef:ControlType.ComboBox}">
+                                                        <Setter Property="Source" Value="/Resources/ComboBox.png" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ControlType}" Value="{x:Static flauidef:ControlType.Custom}">
+                                                        <Setter Property="Source" Value="/Resources/Custom.png" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ControlType}" Value="{x:Static flauidef:ControlType.DataGrid}">
+                                                        <Setter Property="Source" Value="/Resources/DataGrid.png" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ControlType}" Value="{x:Static flauidef:ControlType.DataItem}">
+                                                        <Setter Property="Source" Value="/Resources/Item.png" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ControlType}" Value="{x:Static flauidef:ControlType.Document}">
+                                                        <Setter Property="Source" Value="/Resources/Document.png" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ControlType}" Value="{x:Static flauidef:ControlType.Edit}">
+                                                        <Setter Property="Source" Value="/Resources/Edit.png" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ControlType}" Value="{x:Static flauidef:ControlType.Group}">
+                                                        <Setter Property="Source" Value="/Resources/Group.png" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ControlType}" Value="{x:Static flauidef:ControlType.Header}">
+                                                        <Setter Property="Source" Value="/Resources/Header.png" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ControlType}" Value="{x:Static flauidef:ControlType.HeaderItem}">
+                                                        <Setter Property="Source" Value="/Resources/HeaderItem.png" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ControlType}" Value="{x:Static flauidef:ControlType.Hyperlink}">
+                                                        <Setter Property="Source" Value="/Resources/Hyperlink.png" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ControlType}" Value="{x:Static flauidef:ControlType.Image}">
+                                                        <Setter Property="Source" Value="/Resources/Image.png" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ControlType}" Value="{x:Static flauidef:ControlType.List}">
+                                                        <Setter Property="Source" Value="/Resources/List.png" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ControlType}" Value="{x:Static flauidef:ControlType.ListItem}">
+                                                        <Setter Property="Source" Value="/Resources/Item.png" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ControlType}" Value="{x:Static flauidef:ControlType.Menu}">
+                                                        <Setter Property="Source" Value="/Resources/Menu.png" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ControlType}" Value="{x:Static flauidef:ControlType.MenuBar}">
+                                                        <Setter Property="Source" Value="/Resources/Menu.png" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ControlType}" Value="{x:Static flauidef:ControlType.MenuItem}">
+                                                        <Setter Property="Source" Value="/Resources/MenuItem.png" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ControlType}" Value="{x:Static flauidef:ControlType.Pane}">
+                                                        <Setter Property="Source" Value="/Resources/Pane.png" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ControlType}" Value="{x:Static flauidef:ControlType.ProgressBar}">
+                                                        <Setter Property="Source" Value="/Resources/ProgressBar.png" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ControlType}" Value="{x:Static flauidef:ControlType.RadioButton}">
+                                                        <Setter Property="Source" Value="/Resources/RadioButton.png" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ControlType}" Value="{x:Static flauidef:ControlType.ScrollBar}">
+                                                        <Setter Property="Source" Value="/Resources/ScrollBar.png" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ControlType}" Value="{x:Static flauidef:ControlType.Slider}">
+                                                        <Setter Property="Source" Value="/Resources/Slider.png" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ControlType}" Value="{x:Static flauidef:ControlType.Spinner}">
+                                                        <Setter Property="Source" Value="/Resources/Spinner.png" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ControlType}" Value="{x:Static flauidef:ControlType.SplitButton}">
+                                                        <Setter Property="Source" Value="/Resources/SplitButton.png" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ControlType}" Value="{x:Static flauidef:ControlType.StatusBar}">
+                                                        <Setter Property="Source" Value="/Resources/StatusBar.png" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ControlType}" Value="{x:Static flauidef:ControlType.Tab}">
+                                                        <Setter Property="Source" Value="/Resources/Tab.png" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ControlType}" Value="{x:Static flauidef:ControlType.TabItem}">
+                                                        <Setter Property="Source" Value="/Resources/Item.png" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ControlType}" Value="{x:Static flauidef:ControlType.Text}">
+                                                        <Setter Property="Source" Value="/Resources/Text.png" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ControlType}" Value="{x:Static flauidef:ControlType.Thumb}">
+                                                        <Setter Property="Source" Value="/Resources/Thumb.png" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ControlType}" Value="{x:Static flauidef:ControlType.TitleBar}">
+                                                        <Setter Property="Source" Value="/Resources/TitleBar.png" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ControlType}" Value="{x:Static flauidef:ControlType.ToolBar}">
+                                                        <Setter Property="Source" Value="/Resources/ToolBar.png" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ControlType}" Value="{x:Static flauidef:ControlType.ToolTip}">
+                                                        <Setter Property="Source" Value="/Resources/ToolTip.png" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ControlType}" Value="{x:Static flauidef:ControlType.Tree}">
+                                                        <Setter Property="Source" Value="/Resources/Tree.png" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ControlType}" Value="{x:Static flauidef:ControlType.TreeItem}">
+                                                        <Setter Property="Source" Value="/Resources/Item.png" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ControlType}" Value="{x:Static flauidef:ControlType.Window}">
+                                                        <Setter Property="Source" Value="/Resources/Window.png" />
+                                                    </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
                                         </Image.Style>
                                     </Image>
                                     <TextBlock>
                                         <TextBlock.Text>
-                                            <!-- 调整显示格式为更符合中文习惯 -->
-                                            <MultiBinding StringFormat="类型：{0} 名称：&quot;{1}&quot; 自动化ID：&quot;{2}&quot;">
+                                            <MultiBinding StringFormat="{}{0} &quot;{1}&quot; &quot;{2}&quot;">
                                                 <Binding Path="ControlType" />
                                                 <Binding Path="Name" />
                                                 <Binding Path="AutomationId" />
@@ -138,11 +243,11 @@
                                                             <TextBox.Style>
                                                                 <Style BasedOn="{StaticResource SelectableLabel}" TargetType="{x:Type TextBox}">
                                                                     <Style.Triggers>
-                                                                        <DataTrigger Binding="{Binding Value}" Value="No">
-                                                                            <Setter Property="Foreground" Value="Red" />
+                                                                        <DataTrigger Binding="{Binding Value}" Value="否">
+                                                                            <Setter Property="TextBox.Foreground" Value="Red" />
                                                                         </DataTrigger>
-                                                                        <DataTrigger Binding="{Binding Value}" Value="Yes">
-                                                                            <Setter Property="Foreground" Value="Green" />
+                                                                        <DataTrigger Binding="{Binding Value}" Value="是">
+                                                                            <Setter Property="TextBox.Foreground" Value="Green" />
                                                                         </DataTrigger>
                                                                     </Style.Triggers>
                                                                 </Style>

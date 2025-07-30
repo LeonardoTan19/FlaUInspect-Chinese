@@ -4,11 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="选择UIA版本" Height="150" Width="270"  <!-- 标题汉化 -->
+        Title="选择UIA版本" Height="150" Width="270"
         ResizeMode="NoResize" WindowStartupLocation="CenterOwner" WindowStyle="ToolWindow" ShowInTaskbar="False">
     <Grid>
         <StackPanel HorizontalAlignment="Center" Margin="10">
-            <Label>请选择要使用的UIA版本：</Label>  <!-- 标签文本汉化 -->
+            <Label>请选择要使用的UIA版本：</Label>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <StackPanel.Resources>
                     <Style TargetType="{x:Type Button}">
