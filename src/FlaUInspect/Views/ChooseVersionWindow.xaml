@@ -1,14 +1,14 @@
-﻿<Window x:Class="FlaUInspect.Views.ChooseVersionWindow"
+<Window x:Class="FlaUInspect.Views.ChooseVersionWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Choose UIA Version" Height="150" Width="270"
+        Title="选择UIA版本" Height="150" Width="270"  <!-- 标题汉化 -->
         ResizeMode="NoResize" WindowStartupLocation="CenterOwner" WindowStyle="ToolWindow" ShowInTaskbar="False">
     <Grid>
         <StackPanel HorizontalAlignment="Center" Margin="10">
-            <Label>Chose which UIA version you want to use:</Label>
+            <Label>请选择要使用的UIA版本：</Label>  <!-- 标签文本汉化 -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <StackPanel.Resources>
                     <Style TargetType="{x:Type Button}">
@@ -16,10 +16,10 @@
                     </Style>
                 </StackPanel.Resources>
                 <Button Padding="10" Click="UIA2ButtonClick">
-                    <TextBlock TextAlignment="Center">UIA2<LineBreak/>Managed</TextBlock>
+                    <TextBlock TextAlignment="Center">UIA2<LineBreak/>托管</TextBlock>  <!-- Managed → 托管 -->
                 </Button>
                 <Button Padding="10" Click="UIA3ButtonClick">
-                    <TextBlock TextAlignment="Center">UIA3<LineBreak/>Interop</TextBlock>
+                    <TextBlock TextAlignment="Center">UIA3<LineBreak/>互操作</TextBlock>  <!-- Interop → 互操作 -->
                 </Button>
             </StackPanel>
         </StackPanel>
